@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>小蛇蛇的筆記</title>
+  <subtitle>程式碼是專屬於工程師的魔法詠唱</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="https://yogapan.github.io/"/>
+  <updated>2017-09-25T00:12:43.090Z</updated>
+  <id>https://yogapan.github.io/</id>
+  
+  <author>
+    <name>小蛇蛇</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Youtube-dl濃縮教學筆記</title>
+    <link href="https://yogapan.github.io/2017/08/16/Youtube-dl%E6%BF%83%E7%B8%AE%E6%95%99%E5%AD%B8%E7%AD%86%E8%A8%98/"/>
+    <id>https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/</id>
+    <published>2017-08-15T17:03:14.000Z</published>
+    <updated>2017-09-25T00:12:43.090Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="Youtube-dl基本介紹"><a href="#Youtube-dl基本介紹" class="headerlink" title="Youtube-dl基本介紹"></a>Youtube-dl基本介紹</h2><img src="/2017/08/16/Youtube-dl濃縮教學筆記/01.png" alt="01.png" title="">
+<p>很多Youtube線上影片下載服務可能會有一些限制，像是</p>
+<ul>
+<li>畫質、音質和檔案格式限制</li>
+<li>下載頻率不能太密集、效率不夠好</li>
+<li>無法下載整份清單(可能是進階會員才能使用)</li>
+<li>mp3沒有圖片封面和詳細資訊</li>
+<li>天殺的的一堆彈出式色情廣告</li>
+</ul>
+<p>相反的，<a href="https://github.com/rg3/youtube-dl" target="_blank" rel="external">youtube-dl</a>可以滿足你所有的需求：</p>
+<ul>
+<li>畫質、音質沒有限制</li>
+<li>幾乎支援所有影音格式</li>
+<li>可以下載整份影片清單</li>
+<li>mp3可以加入歌曲封面和專輯資訊</li>
+<li>支援字幕、影片縮圖</li>
+</ul>
+<a id="more"></a>
+<p>而且更猛的是，他不只可以下載Youtube的影片，甚至連Facebook、Twitter、Xuite上的影片都可以下載！<br><del>我絕對不會告訴你連Pornhub上的影片都可以輕鬆下載</del><br><del>但是前提是你要會用Command Line啦，呵呵</del></p>
+<p>所有支援下載的網站清單:<br><a href="https://github.com/rg3/youtube-dl/blob/master/docs/supportedsites.md" target="_blank" rel="external">https://github.com/rg3/youtube-dl/blob/master/docs/supportedsites.md</a></p>
+<hr>
+<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>利用mac套件管理神器<a href="https://brew.sh" target="_blank" rel="external">Homebrew</a>來安裝<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install youtube-dl</div></pre></td></tr></table></figure></p>
+<h3 id="ffmpeg"><a href="#ffmpeg" class="headerlink" title="ffmpeg"></a>ffmpeg</h3><p>如果要使用youtube-dl的轉檔、嵌入字幕、提取音頻、加入專輯封面等等<code>Post-processing</code>的功能的話，則必須安裝<a href="https://www.ffmpeg.org" target="_blank" rel="external">FFmpeg</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install ffmpeg</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="下載影片"><a href="#下載影片" class="headerlink" title="下載影片"></a>下載影片</h2><h3 id="起手式-指定影片檔案格式"><a href="#起手式-指定影片檔案格式" class="headerlink" title="起手式: 指定影片檔案格式"></a>起手式: 指定影片檔案格式</h3><p>用<code>-f</code>或是<code>--format</code>指定影片格式，像是<code>mp4, flv, mkv, webm</code></p>
+<p>Example: 下載mp4格式影片<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -f mp4 &lt;url&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="品質"><a href="#品質" class="headerlink" title="品質"></a>品質</h3><p>Youtube-dl預設會下載最高畫質的影片，但也可以自己選擇想要的品質</p>
+<p>Example: 下載解析度不高於480p的影片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -f &apos;bestvideo[height&lt;=480][ext=mp4]+bestaudio/best[height&lt;=480][ext=m4a]&apos; &lt;url&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="嵌入字幕"><a href="#嵌入字幕" class="headerlink" title="嵌入字幕"></a>嵌入字幕</h3><p><code>--list-subs</code>列出所有可下載字幕的語言</p>
+<ul>
+<li><code>--write-sub</code>下載字幕</li>
+<li><p><code>--embed-sub</code>將字幕嵌入影片中<br><em>這兩個參數要一起合併使用</em></p>
+</li>
+<li><p><code>--all-subs</code>下載所有語言字幕</p>
+</li>
+<li><code>—-sub-lang LANGS</code>指定字幕語言</li>
+</ul>
+<p>例如我想要下載まふまふcover的這首『Loser』<br><img src="/2017/08/16/Youtube-dl濃縮教學筆記/02.png" alt="02.png" title=""></p>
+<p>首先用<code>--list-subs</code>列出所有可下載字幕的語言<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --list-subs https://www.youtube.com/watch?v=pnnsyjcFnjc</div></pre></td></tr></table></figure></p>
+<img src="/2017/08/16/Youtube-dl濃縮教學筆記/03.png" alt="03.png" title="">
+<p>發現zh-TW(繁體中文)是可選的</p>
+<p>下載影片並且嵌入中文字幕<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --write-sub --embed-sub --sub-lang zh-tw -f mp4 https://www.youtube.com/watch?v=pnnsyjcFnjc</div></pre></td></tr></table></figure></p>
+<p>如果妳想要一次下載所有語言的字幕並且嵌入的話<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --write-sub --embed-sub --all-subs -f mp4 https://www.youtube.com/watch?v=pnnsyjcFnjc</div></pre></td></tr></table></figure></p>
+<p>登登！現在下載下來的影片可以選擇字幕囉～<br><img src="/2017/08/16/Youtube-dl濃縮教學筆記/04.png" alt="04.png" title=""></p>
+<p><em>注意</em>：只有<code>mp4, mkv, webm</code>這些影片格式可以嵌入字幕。</p>
+<hr>
+<h2 id="下載音樂"><a href="#下載音樂" class="headerlink" title="下載音樂"></a>下載音樂</h2><h3 id="起手式-指定音樂檔案類型"><a href="#起手式-指定音樂檔案類型" class="headerlink" title="起手式: 指定音樂檔案類型"></a>起手式: 指定音樂檔案類型</h3><ul>
+<li><code>-x</code>或<code>--extract-audio</code>表示提取音頻</li>
+<li><code>--audio-format</code>後面指定音頻檔案類型，像是 <code>mp3, wav, m4a, aac</code></li>
+</ul>
+<p>Example:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -x --audio-format mp3 &lt;url&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="縮圖和資料"><a href="#縮圖和資料" class="headerlink" title="縮圖和資料"></a>縮圖和資料</h3><ul>
+<li><code>--embed-thumbnail</code>加入專輯封面(其實就是youtube影片上的縮圖)</li>
+<li><code>—-add-metadata</code>加入影片資訊</li>
+</ul>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>例如說我要下載米津玄師的這首「ピースサイン」<br><img src="/2017/08/16/Youtube-dl濃縮教學筆記/05.png" alt="05.png" title=""></p>
+<p>轉檔成mp3並且加入縮圖和影片資訊<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -x --audio-format mp3 --embed-thumbnail --add-metadata https://www.youtube.com/watch?v=9aJVr5tTTWk</div></pre></td></tr></table></figure></p>
+<p>成功下載後可以看到上傳者和影片縮圖<br><img src="/2017/08/16/Youtube-dl濃縮教學筆記/06.png" alt="06.png" title=""><br><img src="/2017/08/16/Youtube-dl濃縮教學筆記/07.png" alt="07.png" title=""></p>
+<hr>
+<h2 id="下載playlist"><a href="#下載playlist" class="headerlink" title="下載playlist"></a>下載playlist</h2><h3 id="下載整份影片清單"><a href="#下載整份影片清單" class="headerlink" title="下載整份影片清單"></a>下載整份影片清單</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -f mp4 &lt;playlist-url&gt;</div></pre></td></tr></table></figure>
+<p><em>PS</em>: 除了影片網址的部分改成影片清單的網址，其他部分和下載影片一樣。</p>
+<h3 id="指定起點和終點"><a href="#指定起點和終點" class="headerlink" title="指定起點和終點"></a>指定起點和終點</h3><ul>
+<li><code>--playlist-start NUMBER</code>: 指定起點</li>
+<li><code>—-playlist-end NUMBER</code>: 指定終點</li>
+</ul>
+<p>從第三個影片開始下載到最後一個影片<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --playlist-start 3 -f mp4 &lt;playlist-url&gt;</div></pre></td></tr></table></figure></p>
+<p>從第一個影片下載到倒數第二個影片<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --playlist-end 2 -f mp4 &lt;playlist-url&gt;</div></pre></td></tr></table></figure></p>
+<p>從第三個影片開始下載到倒數第二個影片<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --playlist-start 3 --playlist-end 2 -f mp4 &lt;playlist-url&gt;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="輸出檔名"><a href="#輸出檔名" class="headerlink" title="輸出檔名"></a>輸出檔名</h2><p><code>-o, --output TEMPLATE</code>指定檔名輸出模板。預設是<code>%(title)s-%(id)s.%(ext)s</code></p>
+<p>直接指定檔名叫做<code>test.mp4</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -o <span class="string">"test.mp4"</span> -f mp4 &lt;url&gt;</div></pre></td></tr></table></figure></p>
+<p>假如說我覺得影片id很煩很醜，我要把他去掉，只留下影片標題跟副檔名<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl 0o <span class="string">'%(title)s.%(ext)s'</span></div></pre></td></tr></table></figure></p>
+<h3 id="以下官方範例"><a href="#以下官方範例" class="headerlink" title="以下官方範例"></a>以下官方範例</h3><p>Download YouTube playlist videos in separate directory indexed by video order in a playlist<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -o <span class="string">'%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'</span> https://www.youtube.com/playlist?list=PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re</div></pre></td></tr></table></figure></p>
+<p>Download all playlists of YouTube channel/user keeping each playlist in separate directory:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -o <span class="string">'%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'</span> https://www.youtube.com/user/TheLinuxFoundation/playlists</div></pre></td></tr></table></figure></p>
+<p>查詢更多模板參數:<br><a href="https://github.com/rg3/youtube-dl#output-template" target="_blank" rel="external">https://github.com/rg3/youtube-dl#output-template</a></p>
+<hr>
+<h2 id="登入"><a href="#登入" class="headerlink" title="登入"></a>登入</h2><p>如果有些影片要登入後才能觀看要怎麼辦呢？youtube-dl還有支援帳戶登入的功能:</p>
+<ul>
+<li><code>-u, --username USERNAME</code></li>
+<li><code>-p, --password PASSWORD</code></li>
+</ul>
+<p>Example:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -u <span class="string">'username@gmail.com'</span> -p <span class="string">'password'</span> https://www.youtube.com/?v=&lt;video_id&gt;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>以上的筆記為<em>超濃縮精華版</em>，youtube-dl還有更多強大的功能和參數可供使用。如果要更詳細的參考文件，可以直接參考官方文件: <a href="https://github.com/rg3/youtube-dl" target="_blank" rel="external">https://github.com/rg3/youtube-dl</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;Youtube-dl基本介紹&quot;&gt;&lt;a href=&quot;#Youtube-dl基本介紹&quot; class=&quot;headerlink&quot; title=&quot;Youtube-dl基本介紹&quot;&gt;&lt;/a&gt;Youtube-dl基本介紹&lt;/h2&gt;&lt;img src=&quot;/2017/08/16/Youtube-dl濃縮教學筆記/01.png&quot; alt=&quot;01.png&quot; title=&quot;&quot;&gt;
+&lt;p&gt;很多Youtube線上影片下載服務可能會有一些限制，像是&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;畫質、音質和檔案格式限制&lt;/li&gt;
+&lt;li&gt;下載頻率不能太密集、效率不夠好&lt;/li&gt;
+&lt;li&gt;無法下載整份清單(可能是進階會員才能使用)&lt;/li&gt;
+&lt;li&gt;mp3沒有圖片封面和詳細資訊&lt;/li&gt;
+&lt;li&gt;天殺的的一堆彈出式色情廣告&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;相反的，&lt;a href=&quot;https://github.com/rg3/youtube-dl&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;youtube-dl&lt;/a&gt;可以滿足你所有的需求：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;畫質、音質沒有限制&lt;/li&gt;
+&lt;li&gt;幾乎支援所有影音格式&lt;/li&gt;
+&lt;li&gt;可以下載整份影片清單&lt;/li&gt;
+&lt;li&gt;mp3可以加入歌曲封面和專輯資訊&lt;/li&gt;
+&lt;li&gt;支援字幕、影片縮圖&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="youtube" scheme="https://yogapan.github.io/tags/youtube/"/>
+    
+      <category term="video" scheme="https://yogapan.github.io/tags/video/"/>
+    
+      <category term="download" scheme="https://yogapan.github.io/tags/download/"/>
+    
+      <category term="command line" scheme="https://yogapan.github.io/tags/command-line/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>用Hexo + Github Pages搭建個人部落格</title>
+    <link href="https://yogapan.github.io/2017/08/11/%E7%94%A8Hexo-Github-Pages%E6%90%AD%E5%BB%BA%E5%80%8B%E4%BA%BA%E9%83%A8%E8%90%BD%E6%A0%BC/"/>
+    <id>https://yogapan.github.io/2017/08/11/用Hexo-Github-Pages搭建個人部落格/</id>
+    <published>2017-08-11T12:27:17.000Z</published>
+    <updated>2017-09-25T00:12:43.121Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="什麼是Hexo？"><a href="#什麼是Hexo？" class="headerlink" title="什麼是Hexo？"></a>什麼是Hexo？</h2><p><a href="https://hexo.io/zh-tw/index.html" target="_blank" rel="external">Hexo</a>官方簡介：</p>
+<blockquote>
+<p>A fast, simple &amp; powerful blog framework, powered by Node.js<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/01.png" alt="01.png" title=""></p>
+</blockquote>
+<p>Hexo的特色:</p>
+<ul>
+<li>用Markdown語法寫blog</li>
+<li>用Command Line來進行操作</li>
+<li>140幾種網站主題可供選擇</li>
+<li>多種插件，可以加入<a href="https://disqus.com/" target="_blank" rel="external">disqus</a>討論功能和瀏覽人數計數等功能</li>
+<li>輕易部署到<a href="https://pages.github.com" target="_blank" rel="external">Github Pages</a>和<a href="https://www.heroku.com/" target="_blank" rel="external">Heroku</a></li>
+</ul>
+<a id="more"></a>
+<hr>
+<h2 id="安裝Hexo"><a href="#安裝Hexo" class="headerlink" title="安裝Hexo"></a>安裝Hexo</h2><p>Hexo是由<a href="https://nodejs.org/en/" target="_blank" rel="external">Node.js</a>寫成的，所以可以透過Node.js的套件管理工具<a href="https://www.npmjs.com/" target="_blank" rel="external">npm</a>或者<a href="https://yarnpkg.com/en/" target="_blank" rel="external">yarn</a>來安裝。我個人是使用Yarn來作為我的Node套件管理工具。如果電腦裡面還沒有安裝yarn可以過以下指令安裝：</p>
+<p>Mac使用者透過<a href="https://brew.sh" target="_blank" rel="external">Homebrew</a>安裝<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install yarn</div></pre></td></tr></table></figure></p>
+<p>Windows使用者透過<a href="https://chocolatey.org" target="_blank" rel="external">Chocolatey</a>安裝<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ choco install yarn</div></pre></td></tr></table></figure></p>
+<p>接著安裝Hexo:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yarn global add hexo</div></pre></td></tr></table></figure></p>
+<p>創建我的部落格<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo init blog</div></pre></td></tr></table></figure></p>
+<p>啟動local端server<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> blog</div><div class="line">$ hexo server</div></pre></td></tr></table></figure></p>
+<p>接著在你的瀏覽器裡輸入localhost:4000，就可以看到你的部落格啦！<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/02.png" alt="02.png" title=""></p>
+<hr>
+<h2 id="目錄結構"><a href="#目錄結構" class="headerlink" title="目錄結構"></a>目錄結構</h2><p>再繼續往下看以前，我們先來暸解整個目錄結構:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">blog/</div><div class="line">  _config.yml            -&gt; 最主要的設定檔</div><div class="line">  package.json           -&gt; 相依套件列表</div><div class="line">  node_modules/          -&gt; 相依套件</div><div class="line">  public/                -&gt; 生成的靜態網站資源</div><div class="line">  <span class="built_in">source</span>/</div><div class="line">    _posts               -&gt; 你寫的文章都放在這裡面</div><div class="line">      hello-world.md     -&gt; 文章</div><div class="line">  themes/                -&gt; 網站主題都放裡面</div><div class="line">    landscape/</div><div class="line">      _config.yml        -&gt; 主題設定檔</div><div class="line">  scaffolds/</div><div class="line">    draft.md</div><div class="line">    page.md</div><div class="line">    post.md</div></pre></td></tr></table></figure></p>
+<h3 id="設定檔"><a href="#設定檔" class="headerlink" title="設定檔"></a>設定檔</h3><p>網站設定<code>_config.yml</code>，可設定：</p>
+<ul>
+<li>作者名字、標題、描述</li>
+<li>語系設定</li>
+<li>是否產生assets資料夾</li>
+<li>套用主題</li>
+</ul>
+<p>主題設定<code>themes/&lt;theme-name&gt;/_config.yml</code>，可設定：</p>
+<ul>
+<li>頭像</li>
+<li>社群網路連結</li>
+<li>新增頁面</li>
+<li>其他客製化選項(scheme、高亮、動畫等等)</li>
+</ul>
+<h3 id="主題資料夾"><a href="#主題資料夾" class="headerlink" title="主題資料夾"></a>主題資料夾</h3><p><code>themes/</code>這個資料夾用來放置主題，目前裡面只有預設的landscape而已。</p>
+<h3 id="發文資料夾"><a href="#發文資料夾" class="headerlink" title="發文資料夾"></a>發文資料夾</h3><p><code>source/_posts</code>這個資料夾是真正會存放你文章的地方。裡面有一篇預設的Hello World。</p>
+<hr>
+<h2 id="更換主題"><a href="#更換主題" class="headerlink" title="更換主題"></a>更換主題</h2><h3 id="NexT"><a href="#NexT" class="headerlink" title="NexT"></a>NexT</h3><p>Hexo預設的主題是<a href="https://github.com/hexojs/hexo-theme-landscape" target="_blank" rel="external">landscape</a>，但是似乎有點….不夠帥氣，所以我們可以到這裡來挑選我們想要的主題： <a href="https://hexo.io/themes/" target="_blank" rel="external">https://hexo.io/themes/</a></p>
+<p>在精挑細選後，我決定使用<a href="http://theme-next.iissnan.com" target="_blank" rel="external">NexT</a>這個主題，因為：</p>
+<ul>
+<li>介面美觀</li>
+<li>官方文件詳細</li>
+<li>可自定性高(多種scheme和code highlight)</li>
+<li>支援多種語言</li>
+<li>Github上星星數多達9000顆，跟風一起用準沒錯<img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/03.png" alt="03.png" title="">
+</li>
+</ul>
+<p>用Git安裝NexT<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git <span class="built_in">clone</span> https://github.com/iissnan/hexo-theme-next themes/next</div></pre></td></tr></table></figure></p>
+<p>接著修改網站設定<code>_config.yml</code><br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">theme:</span> <span class="string">next</span></div></pre></td></tr></table></figure></p>
+<p>重新啟動server<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure></p>
+<img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/04.png" alt="04.png" title="">
+<img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/05.png" alt="05.png" title="">
+<p>哇！！整個高端大氣上檔次！</p>
+<h3 id="語言設定"><a href="#語言設定" class="headerlink" title="語言設定"></a>語言設定</h3><p>在<code>_config.yml</code>中找到language欄位，設定為zh-tw<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">language:</span> <span class="string">zh-tw</span></div></pre></td></tr></table></figure></p>
+<p>這樣就支援繁體中文了！</p>
+<h3 id="Scheme設定"><a href="#Scheme設定" class="headerlink" title="Scheme設定"></a>Scheme設定</h3><p>NexT提供多種Scheme選擇，其中Muse是預設的主題。而我個人是選擇使用Pisces當做我的主題。</p>
+<p>在主題設定<code>theme/next/_config.yml</code>裡找到schema設定，把注釋去掉即可開啟。<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#scheme: Muse</span></div><div class="line"><span class="comment">#scheme: Mist</span></div><div class="line"><span class="attr">scheme:</span> <span class="string">Pisces</span></div><div class="line"><span class="comment">#scheme: Gemini</span></div></pre></td></tr></table></figure></p>
+<p>Muse:<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/06.png" alt="06.png" title=""></p>
+<p>Mist:<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/07.png" alt="07.png" title=""></p>
+<p>Pisces:<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/08.png" alt="08.png" title=""></p>
+<p>Gemini:<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/09.png" alt="09.png" title=""></p>
+<h3 id="代碼高亮"><a href="#代碼高亮" class="headerlink" title="代碼高亮"></a>代碼高亮</h3><p>官方說明</p>
+<blockquote>
+<p>NexT 使用 Tomorrow Theme 作为代码高亮，共有5款主题供你选择。 NexT 默认使用的是 白色的 normal 主题，可选的值有 normal，night， night blue， night bright， night eighties<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">highlight_theme:</span> <span class="string">normal</span></div></pre></td></tr></table></figure></p>
+</blockquote>
+<img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/10.png" alt="10.png" title="">
+<h3 id="動畫效果"><a href="#動畫效果" class="headerlink" title="動畫效果"></a>動畫效果</h3><p>在主題設定<code>themes/next/_config.yml</code>裡選擇要開啟的動畫效果，要打開就把值設定成true<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Canvas-nest</span></div><div class="line"><span class="attr">canvas_nest:</span> <span class="literal">true</span></div><div class="line"></div><div class="line"><span class="comment"># three_waves</span></div><div class="line"><span class="attr">three_waves:</span> <span class="literal">false</span></div><div class="line"></div><div class="line"><span class="comment"># canvas_lines</span></div><div class="line"><span class="attr">canvas_lines:</span> <span class="literal">false</span></div><div class="line"></div><div class="line"><span class="comment"># canvas_sphere</span></div><div class="line"><span class="attr">canvas_sphere:</span> <span class="literal">false</span></div><div class="line"></div><div class="line"><span class="comment"># Only fit scheme Pisces</span></div><div class="line"><span class="comment"># Canvas-ribbon</span></div><div class="line"><span class="attr">canvas_ribbon:</span> <span class="literal">false</span></div></pre></td></tr></table></figure></p>
+<p>我通常會開啟canvas_nest這個背景動畫效果，帶有微微的科技中二感，很對我的口味。<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/11.png" alt="11.png" title=""></p>
+<hr>
+<h2 id="關於作者"><a href="#關於作者" class="headerlink" title="關於作者"></a>關於作者</h2><p>主題都換好了，那我們的頭像和作者介紹呢？</p>
+<h3 id="頭像"><a href="#頭像" class="headerlink" title="頭像"></a>頭像</h3><p>先新增一個資料夾，用來存放大頭照<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ mkdir <span class="built_in">source</span>/uploads</div></pre></td></tr></table></figure></p>
+<p>然後把你的大頭照丟進<code>source/uploads/</code>這個資料夾裡，然後在<strong>主題設定</strong><code>themes/next/_config.yml</code>中設定大頭照路徑:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">avatar:</span> <span class="string">/uploads/avatar.jpg</span></div></pre></td></tr></table></figure></p>
+<h3 id="作者"><a href="#作者" class="headerlink" title="作者"></a>作者</h3><p>在<strong>網站設定</strong><code>_config.yml</code>中設定名字、標題和副標題<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">title:</span> <span class="string">&lt;標題&gt;</span></div><div class="line"><span class="attr">subtitle:</span> <span class="string">&lt;副標題&gt;</span></div><div class="line"><span class="attr">description:</span> <span class="string">&lt;描述&gt;</span></div><div class="line"><span class="attr">author:</span> <span class="string">&lt;你的名字&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="開啟社群帳號連結"><a href="#開啟社群帳號連結" class="headerlink" title="開啟社群帳號連結"></a>開啟社群帳號連結</h3><p>在<strong>主題設定</strong><code>themes/next/_config.yml</code>中新增社群網路連結。<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Social links</span></div><div class="line"><span class="attr">social:</span></div><div class="line"><span class="attr">  GitHub:</span> <span class="attr">https://github.com/your-user-name</span></div><div class="line"><span class="attr">  Twitter:</span> <span class="attr">https://twitter.com/your-user-name</span></div></pre></td></tr></table></figure></p>
+<h3 id="About-Me-Page"><a href="#About-Me-Page" class="headerlink" title="About Me Page"></a>About Me Page</h3><p>新建一個about頁面<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new page <span class="string">"about"</span></div></pre></td></tr></table></figure></p>
+<p>在<code>themes/next/_config.yml</code>將about前面的註解去掉<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="attr">menu:</span></div><div class="line"><span class="attr">  home:</span> <span class="string">/</span></div><div class="line"><span class="attr">  archives:</span> <span class="string">/archives</span></div><div class="line"><span class="attr">  tags:</span> <span class="string">/tags</span></div><div class="line"><span class="attr">  about:</span> <span class="string">/about</span></div></pre></td></tr></table></figure></p>
+<p>編輯<code>source/about/index.md</code><br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: 關於我</div><div class="line">date: 2017-08-10 13:23:37</div><div class="line">---</div><div class="line"></div><div class="line"><span class="section"># 哈囉</span></div><div class="line">我是小蛇蛇我好可愛 &gt;///&lt;</div></pre></td></tr></table></figure></p>
+<p>成果:<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/12.png" alt="12.png" title=""><br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/13.png" alt="13.png" title=""></p>
+<p>Ok，到這裡關於自己的一切都設定好了，接下來要發表第一篇文章囉！</p>
+<hr>
+<h2 id="我的第一篇文章"><a href="#我的第一篇文章" class="headerlink" title="我的第一篇文章"></a>我的第一篇文章</h2><h3 id="設定"><a href="#設定" class="headerlink" title="設定"></a>設定</h3><p>所有的文章都會在<code>source/_posts</code>裡面。其實一開始裡面就已經有一篇範例文章<code>hello-world.md</code>了。</p>
+<p>在發表文章以前，先進行一個簡單的設定，在網站設定<code>_config.yml</code>中:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>這樣每當新增一篇文章時，會自動在<code>source/_posts/</code>裡新增一個跟文章同名的資料夾用來放置圖片資源。</p>
+<h3 id="新增文章"><a href="#新增文章" class="headerlink" title="新增文章"></a>新增文章</h3><p>創造一篇名叫”測試”的文章<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new post 測試</div></pre></td></tr></table></figure></p>
+<p>編輯<code>source/_posts/test.md</code><br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: 測試</div><div class="line">date: 2017-08-11 19:46:32</div><div class="line">tags:</div><div class="line">---</div><div class="line"></div><div class="line">測試發文～～～</div></pre></td></tr></table></figure></p>
+<h3 id="嵌入圖片"><a href="#嵌入圖片" class="headerlink" title="嵌入圖片"></a>嵌入圖片</h3><p>圖片遷入的格式<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#123;% asset_img [image-name] %&#125;</div><div class="line">&#123;% asset_img [image-name] [title] %&#125;</div></pre></td></tr></table></figure></p>
+<p>例如說有一個圖片<code>snake.jpg</code></p>
+<p>要引用在文章裡只要先把<code>snake.jpg</code>丟到<code>source/_posts/測試/</code> 裡，然後在<code>source/_posts/測試.md</code> 裡<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: 測試</div><div class="line">date: 2017-08-10 13:23:37</div><div class="line">tags:</div><div class="line">---</div><div class="line"></div><div class="line">測試發文～～～</div><div class="line">&#123;% asset_img snake.jpg %&#125;</div></pre></td></tr></table></figure></p>
+<p>就可以看到圖片了<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/14.png" alt="14.png" title=""></p>
+<hr>
+<h2 id="Tags分類"><a href="#Tags分類" class="headerlink" title="Tags分類"></a>Tags分類</h2><p>文章可以透過標籤來進行分類</p>
+<p>新建一個頁面，叫做<code>tags</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new page <span class="string">"tags"</span></div></pre></td></tr></table></figure></p>
+<p>編輯剛新建的頁面<code>source/_posts/tags/index.md</code>，將頁面的type設為”tags”。<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: All tags</div><div class="line">date: 2017-08-10 13:23:37</div><div class="line">type: "tags"</div><div class="line">---</div></pre></td></tr></table></figure></p>
+<p>為剛剛那篇文章加入標籤<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">---</div><div class="line">title: 測試</div><div class="line">date: 2017-08-10 13:23:37</div><div class="line">tags: test</div><div class="line">---</div></pre></td></tr></table></figure></p>
+<p>當一篇文章有多個Tags時<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">tags:</div><div class="line">  - Tag1</div><div class="line">  - Tag2</div><div class="line">  - Tag3</div></pre></td></tr></table></figure></p>
+<p>登登！文章現在可以透過標籤分類了<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/15.png" alt="15.png" title=""><br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/16.png" alt="16.png" title=""></p>
+<hr>
+<h2 id="文章搜索"><a href="#文章搜索" class="headerlink" title="文章搜索"></a>文章搜索</h2><p>很酷的是，Hexo還支援文章搜索的功能喔！</p>
+<p>安裝套件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yarn add hexo-generator-search</div></pre></td></tr></table></figure></p>
+<p>在主題設置<code>theme/next/_config.yml</code>中找到local_search，並把enable設為true<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># Local search</span></div><div class="line"><span class="string">search</span></div><div class="line"><span class="attr">  local_search:</span></div><div class="line"><span class="attr">    enable:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>可以支援搜尋功能了！<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/17.png" alt="17.png" title=""></p>
+<hr>
+<h2 id="部署到Github-Pages"><a href="#部署到Github-Pages" class="headerlink" title="部署到Github Pages"></a>部署到Github Pages</h2><p>到這裡，只剩下最後一步，就是讓大家都能看到你的部落格！<br>有很多種部署的方式，在這裡我們選擇使用最簡單的<a href="https://pages.github.com/" target="_blank" rel="external">Github Page</a>。</p>
+<p>Github Page的官方介紹</p>
+<blockquote>
+<p>Websites for you and your projects.<br>Hosted directly from your GitHub repository. Just edit, push, and your changes are live.  </p>
+</blockquote>
+<p>先創建一個Github專案，名稱為<code>&lt;username&gt;.github.io</code>。例如說我的名字叫做yogapan，那我就創建一個<code>yogapan.github.io</code>的專案。<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/18.png" alt="18.png" title=""></p>
+<p>安裝套件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yarn add hexo-deployer-git</div></pre></td></tr></table></figure></p>
+<p>修改<strong>網站設定</strong><code>_config.yml</code>，找到deploy之後進行以下修改<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">deploy:</span></div><div class="line"><span class="attr">  type:</span> <span class="string">git</span></div><div class="line"><span class="attr">  repo:</span> <span class="attr">https://github.com/&lt;yourAccount&gt;/&lt;repo&gt;</span></div><div class="line"><span class="attr">  branch:</span> <span class="string">&lt;your-branch&gt;</span></div></pre></td></tr></table></figure></p>
+<p>Repo是你剛新建專案的網址<br>Branch則是指定分枝，通常是master</p>
+<p>接著部署到Github Pages<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure></p>
+<p>接下來就可以到你的網站<code>&lt;username&gt;.github.io</code>來看看囉！</p>
+<p>關於部署更詳細的資料可以看這裡:<br><a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">https://hexo.io/docs/deployment.html</a></p>
+<hr>
+<h2 id="文章預覽"><a href="#文章預覽" class="headerlink" title="文章預覽"></a>文章預覽</h2><p>可以根據字數來裁切預覽，在<code>themes/next/_config.yml</code>中:<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">auto_excerpt:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">true</span></div><div class="line"><span class="attr">  length:</span> <span class="number">150</span></div></pre></td></tr></table></figure></p>
+<p>但是不推薦此功能。</p>
+<p>更好的方法是在文章中用<code>&lt;!--more--&gt;</code>來做斷點，<code>&lt;!--more--&gt;</code>以上的部分就是預覽會顯示的部分:<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">預覽看得到我</div><div class="line">&lt;!--more--&gt;</div><div class="line">預覽看不到我</div></pre></td></tr></table></figure></p>
+<p>這樣文章預覽的部分就完成了！<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/19.png" alt="19.png" title=""></p>
+<hr>
+<h2 id="閱讀人數統計"><a href="#閱讀人數統計" class="headerlink" title="閱讀人數統計"></a>閱讀人數統計</h2><p>這裡我們使用LeanCloud的服務，先去註冊一組帳號:<br><a href="https://leancloud.cn/" target="_blank" rel="external">https://leancloud.cn/</a></p>
+<p>Email認證完後，點擊右上角訪問控制台，並且創建一個新的應用<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/20.png" alt="20.png" title=""></p>
+<p>接著創建一個新的class叫做<code>Counter</code><br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/21.png" alt="21.png" title=""></p>
+<p>接著到<code>設置 -&gt; 應用key</code>頁面，複製<code>App ID</code>和<code>App Key</code>到<code>themes/next/_config.yml</code>中<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">leancloud_visitors:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">true</span></div><div class="line"><span class="attr">  app_id:</span> <span class="string">&lt;your-id&gt;</span></div><div class="line"><span class="attr">  app_key:</span> <span class="string">&lt;your-key&gt;</span></div></pre></td></tr></table></figure></p>
+<p>完成後部署上去，就可以看到閱讀次數囉！<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/22.png" alt="22.png" title=""></p>
+<p>更詳細的教學可以看這裡：<br><a href="https://notes.wanghao.work/2015-10-21-%E4%B8%BANexT%E4%B8%BB%E9%A2%98%E6%B7%BB%E5%8A%A0%E6%96%87%E7%AB%A0%E9%98%85%E8%AF%BB%E9%87%8F%E7%BB%9F%E8%AE%A1%E5%8A%9F%E8%83%BD.html" target="_blank" rel="external">为NexT主题添加文章阅读量统计功能 | Doublemine</a></p>
+<hr>
+<h2 id="加入Disqus留言功能"><a href="#加入Disqus留言功能" class="headerlink" title="加入Disqus留言功能"></a>加入Disqus留言功能</h2><p>我們可以利用<a href="https://disqus.com/" target="_blank" rel="external">Disqus</a>來達到留言互動的的功能，先註冊一組帳密：<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/23.png" alt="23.png" title=""></p>
+<p>選擇I want to install Disqus on my site<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/24.png" alt="24.png" title=""></p>
+<p>填入<code>Website Name</code><br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/25.png" alt="25.png" title=""></p>
+<p>完成後在<code>themes/next/_config.yml</code>填入妳的website name<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">disqus:</span></div><div class="line"><span class="attr">  enable:</span> <span class="literal">true</span></div><div class="line"><span class="attr">  shortname:</span> <span class="string">&lt;your-website-name&gt;</span></div><div class="line"><span class="attr">  count:</span> <span class="literal">true</span></div></pre></td></tr></table></figure></p>
+<p>大功告成<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/26.png" alt="26.png" title=""></p>
+<p>預設會在所有page上加入評論系統。如果不要開啟評論系統的話，在開頭加上:<br><figure class="highlight md"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">comments: false</div><div class="line">---</div></pre></td></tr></table></figure></p>
+<p>更詳細可以參考這裡：<br><a href="http://www.jianshu.com/p/c4f65ebe23ad" target="_blank" rel="external">http://www.jianshu.com/p/c4f65ebe23ad</a></p>
+<hr>
+<h2 id="RSS訂閱"><a href="#RSS訂閱" class="headerlink" title="RSS訂閱"></a>RSS訂閱</h2><p>安裝相依套件<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yarn add hexo-generator-feed</div></pre></td></tr></table></figure></p>
+<p>在<code>_config.yml</code>加入<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="attr">feed:</span></div><div class="line"><span class="attr">  type:</span> <span class="string">atom</span></div><div class="line"><span class="attr">  path:</span> <span class="string">atom.xml</span></div><div class="line"><span class="attr">  limit:</span> <span class="number">20</span></div></pre></td></tr></table></figure></p>
+<p>登登！<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/27.png" alt="27.png" title=""></p>
+<hr>
+<h2 id="Google-SEO"><a href="#Google-SEO" class="headerlink" title="Google SEO"></a>Google SEO</h2><h3 id="獲取-Google-Site-Verification-Code"><a href="#獲取-Google-Site-Verification-Code" class="headerlink" title="獲取 Google Site Verification Code"></a>獲取 Google Site Verification Code</h3><p>登入<a href="https://www.google.com/webmasters/tools/home?hl=zh-TW" target="_blank" rel="external">Google Search Console</a>，點選新增內容，填入你的網址:<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/28.png" alt="28.png" title=""></p>
+<p>驗證方法選擇<code>其他方式</code> -&gt; <code>HTML Tag</code>，獲得以以下驗證碼<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"google-site-verification"</span> <span class="attr">content</span>=<span class="string">"XXXXXXXXXXXXXXXXXXXXXXX"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/29.png" alt="29.png" title="">
+<p>在<code>themes/next/_config.yml</code>中填入驗證碼<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">google_site_verification:</span> <span class="string">XXXXXXXXXXXXXXXXXXXXXXX</span></div></pre></td></tr></table></figure></p>
+<p>接著就可以看到網頁搜索的資訊了<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/30.png" alt="30.png" title=""><br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/31.png" alt="31.png" title=""></p>
+<h3 id="提交sitemap"><a href="#提交sitemap" class="headerlink" title="提交sitemap"></a>提交sitemap</h3><p>安裝<code>hexo-sitemap-generator</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ yarn add hexo-generator-sitemap</div></pre></td></tr></table></figure></p>
+<p>在<code>_config.yml</code>中<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="attr">sitemap:</span></div><div class="line"><span class="attr">  path:</span> <span class="string">sitemap.xml</span></div></pre></td></tr></table></figure></p>
+<p>並且填入你的網址<br><figure class="highlight yml"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attr">url:</span> <span class="attr">https://&lt;yourname&gt;.github.io</span></div></pre></td></tr></table></figure></p>
+<p>產生<code>sitemap.xml</code>，並且部署<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div><div class="line">$ hexo deploy</div></pre></td></tr></table></figure></p>
+<p>提交到<a href="https://www.google.com/webmasters/tools/home?hl=zh-TW" target="_blank" rel="external">Google Search Console</a><br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/32.png" alt="32.png" title=""></p>
+<p>現在Google搜尋能更好的解析網站的結構惹<br><img src="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/33.png" alt="33.png" title=""></p>
+<h3 id="關於SEO、Google-Search-Console、Sitemap參考資料"><a href="#關於SEO、Google-Search-Console、Sitemap參考資料" class="headerlink" title="關於SEO、Google Search Console、Sitemap參考資料"></a>關於SEO、Google Search Console、Sitemap參考資料</h3><ul>
+<li><a href="http://www.yesharris.com/search-console-intro/" target="_blank" rel="external">Google Search Console 初學者指南，如何使用及安裝 | Harris 先生</a></li>
+<li><a href="https://shopline.tw/blog/new-sitemap-feature-for-ecommerce-stores/" target="_blank" rel="external">SEO功能優化 Sitemap與Google網站管理員的運用 | Shopline電商教室</a></li>
+</ul>
+<h3 id="其他教學"><a href="#其他教學" class="headerlink" title="其他教學"></a>其他教學</h3><ul>
+<li><a href="https://segmentfault.com/q/1010000004659915/a-1020000004895702" target="_blank" rel="external">hexo-generator-sitemap 生成的sitemap如何配置自定义的域名？ - dkylin的回答 - SegmentFault</a></li>
+<li><a href="http://www.yuan-ji.me/Hexo-%E4%BC%98%E5%8C%96%EF%BC%9A%E6%8F%90%E4%BA%A4sitemap%E5%8F%8A%E8%A7%A3%E5%86%B3%E7%99%BE%E5%BA%A6%E7%88%AC%E8%99%AB%E6%8A%93%E5%8F%96-GitHub-Pages-%E9%97%AE%E9%A2%98/" target="_blank" rel="external">Hexo 优化：提交 sitemap 及解决百度爬虫无法抓取 GitHub Pages 链接问题 | JI’s Blog</a></li>
+<li><a href="http://hunao.info/2016/06/01/Hexo-Seo%E4%BC%98%E5%8C%96%E8%AE%A9%E4%BD%A0%E7%9A%84%E5%8D%9A%E5%AE%A2%E5%9C%A8google%E6%90%9C%E7%B4%A2%E6%8E%92%E5%90%8D%E7%AC%AC%E4%B8%80/" target="_blank" rel="external">Hexo Seo优化让你的博客在google搜索排名第一 | 一个人胡闹的日子</a></li>
+</ul>
+<hr>
+<h2 id="Hexo指令備忘錄"><a href="#Hexo指令備忘錄" class="headerlink" title="Hexo指令備忘錄"></a>Hexo指令備忘錄</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ hexo init</div><div class="line">$ hexo clean</div><div class="line">$ hexo generate</div><div class="line">$ hexo new post &lt;title&gt;</div><div class="line">$ hexo new page tags</div><div class="line">$ hexo server</div><div class="line">$ hexo server -p 8000 --debug</div><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="FAQ"><a href="#FAQ" class="headerlink" title="FAQ"></a>FAQ</h2><p>Q: 為什麼我修改了設定之後，沒有反應出來呢？<br>A: 可以重啟server試試看，通常都可以解決問題。</p>
+<p>Q: 為什麼部署到Github Page之後網站沒有更新呢？<br>A: 有時部署到Github Pages上後可能會有延遲，有時要等個30秒左右才會更新。或者是嘗試<code>$ hexo clean &amp;&amp; hexo deploy</code>試試看。</p>
+<hr>
+<h2 id="參考資料"><a href="#參考資料" class="headerlink" title="參考資料"></a>參考資料</h2><h3 id="連結"><a href="#連結" class="headerlink" title="連結:"></a>連結:</h3><p>Hexo<br><a href="https://github.com/hexojs/hexo" target="_blank" rel="external">https://github.com/hexojs/hexo</a><br><a href="https://hexo.io/zh-tw/index.html" target="_blank" rel="external">https://hexo.io/zh-tw/index.html</a></p>
+<p>Hexo Theme:<br><a href="https://hexo.io/themes/" target="_blank" rel="external">https://hexo.io/themes/</a></p>
+<p>NexT:<br><a href="http://theme-next.iissnan.com" target="_blank" rel="external">http://theme-next.iissnan.com</a><br><a href="https://github.com/iissnan/hexo-theme-next" target="_blank" rel="external">https://github.com/iissnan/hexo-theme-next</a></p>
+<p>Github Pages:<br><a href="https://pages.github.com" target="_blank" rel="external">https://pages.github.com</a></p>
+<p>Node.js<br><a href="https://nodejs.org/en/" target="_blank" rel="external">https://nodejs.org/en/</a></p>
+<p>Npm and Yarn<br><a href="https://www.npmjs.com/" target="_blank" rel="external">https://www.npmjs.com/</a><br><a href="https://yarnpkg.com/en/" target="_blank" rel="external">https://yarnpkg.com/en/</a></p>
+<p>Brew and Chocolatey<br><a href="https://brew.sh" target="_blank" rel="external">https://brew.sh</a><br><a href="https://chocolatey.org" target="_blank" rel="external">https://chocolatey.org</a></p>
+<p>Disqus:<br><a href="https://disqus.com/" target="_blank" rel="external">https://disqus.com/</a></p>
+<h3 id="其他不錯的主題"><a href="#其他不錯的主題" class="headerlink" title="其他不錯的主題"></a>其他不錯的主題</h3><ul>
+<li><a href="https://github.com/nameoverflow/hexo-theme-icalm" target="_blank" rel="external">hexo-theme-icalm</a></li>
+<li><a href="https://github.com/EYHN/hexo-theme-one" target="_blank" rel="external">hexo-theme-one</a></li>
+<li><a href="https://github.com/Kaijun/hexo-theme-huxblog" target="_blank" rel="external">hexo-theme-huxblog</a></li>
+<li><a href="https://github.com/YenYuHsuan/hexo-theme-beantech" target="_blank" rel="external">hexo-theme-beantech</a></li>
+</ul>
+<h3 id="同性質應用："><a href="#同性質應用：" class="headerlink" title="同性質應用："></a>同性質應用：</h3><ul>
+<li><a href="http://gohugo.io/" target="_blank" rel="external">Hugo</a></li>
+<li><a href="https://jekyllrb.com/" target="_blank" rel="external">jekyll</a></li>
+</ul>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h2 id=&quot;什麼是Hexo？&quot;&gt;&lt;a href=&quot;#什麼是Hexo？&quot; class=&quot;headerlink&quot; title=&quot;什麼是Hexo？&quot;&gt;&lt;/a&gt;什麼是Hexo？&lt;/h2&gt;&lt;p&gt;&lt;a href=&quot;https://hexo.io/zh-tw/index.html&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Hexo&lt;/a&gt;官方簡介：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;A fast, simple &amp;amp; powerful blog framework, powered by Node.js&lt;br&gt;&lt;img src=&quot;/2017/08/11/用Hexo-Github-Pages搭建個人部落格/01.png&quot; alt=&quot;01.png&quot; title=&quot;&quot;&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Hexo的特色:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用Markdown語法寫blog&lt;/li&gt;
+&lt;li&gt;用Command Line來進行操作&lt;/li&gt;
+&lt;li&gt;140幾種網站主題可供選擇&lt;/li&gt;
+&lt;li&gt;多種插件，可以加入&lt;a href=&quot;https://disqus.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;disqus&lt;/a&gt;討論功能和瀏覽人數計數等功能&lt;/li&gt;
+&lt;li&gt;輕易部署到&lt;a href=&quot;https://pages.github.com&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Github Pages&lt;/a&gt;和&lt;a href=&quot;https://www.heroku.com/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;Heroku&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+    
+    </summary>
+    
+    
+      <category term="hexo" scheme="https://yogapan.github.io/tags/hexo/"/>
+    
+      <category term="blog" scheme="https://yogapan.github.io/tags/blog/"/>
+    
+  </entry>
+  
+</feed>

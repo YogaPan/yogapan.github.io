@@ -1,0 +1,1320 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-tw">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="HkcWHv81BNemRp9XX6qi6s4oeS1ONrcG7FNm0ZnzNKo" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="youtube,video,download,command line," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="小蛇蛇的筆記" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Youtube-dl基本介紹 很多Youtube線上影片下載服務可能會有一些限制，像是  畫質、音質和檔案格式限制 下載頻率不能太密集、效率不夠好 無法下載整份清單(可能是進階會員才能使用) mp3沒有圖片封面和詳細資訊 天殺的的一堆彈出式色情廣告  相反的，youtube-dl可以滿足你所有的需求：  畫質、音質沒有限制 幾乎支援所有影音格式 可以下載整份影片清單 mp3可以加入歌曲封面和專輯資">
+<meta name="keywords" content="youtube,video,download,command line">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Youtube-dl濃縮教學筆記">
+<meta property="og:url" content="https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/index.html">
+<meta property="og:site_name" content="小蛇蛇的筆記">
+<meta property="og:description" content="Youtube-dl基本介紹 很多Youtube線上影片下載服務可能會有一些限制，像是  畫質、音質和檔案格式限制 下載頻率不能太密集、效率不夠好 無法下載整份清單(可能是進階會員才能使用) mp3沒有圖片封面和詳細資訊 天殺的的一堆彈出式色情廣告  相反的，youtube-dl可以滿足你所有的需求：  畫質、音質沒有限制 幾乎支援所有影音格式 可以下載整份影片清單 mp3可以加入歌曲封面和專輯資">
+<meta property="og:locale" content="zh-tw">
+<meta property="og:image" content="https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/01.png">
+<meta property="og:image" content="https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/02.png">
+<meta property="og:image" content="https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/03.png">
+<meta property="og:image" content="https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/04.png">
+<meta property="og:image" content="https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/05.png">
+<meta property="og:image" content="https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/06.png">
+<meta property="og:image" content="https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/07.png">
+<meta property="og:updated_time" content="2017-09-25T00:12:43.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Youtube-dl濃縮教學筆記">
+<meta name="twitter:description" content="Youtube-dl基本介紹 很多Youtube線上影片下載服務可能會有一些限制，像是  畫質、音質和檔案格式限制 下載頻率不能太密集、效率不夠好 無法下載整份清單(可能是進階會員才能使用) mp3沒有圖片封面和詳細資訊 天殺的的一堆彈出式色情廣告  相反的，youtube-dl可以滿足你所有的需求：  畫質、音質沒有限制 幾乎支援所有影音格式 可以下載整份影片清單 mp3可以加入歌曲封面和專輯資">
+<meta name="twitter:image" content="https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/01.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/"/>
+
+
+
+
+
+  <title>Youtube-dl濃縮教學筆記 | 小蛇蛇的筆記</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-tw">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">小蛇蛇的筆記</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">程式碼是專屬於工程師的魔法詠唱</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首頁
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            關於
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            歸檔
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            標籤
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            檢索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="小蛇蛇">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="小蛇蛇的筆記">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Youtube-dl濃縮教學筆記</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">發表於</span>
+              
+              <time title="創建於" itemprop="dateCreated datePublished" datetime="2017-08-16T01:03:14+08:00">
+                2017-08-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/08/16/Youtube-dl濃縮教學筆記/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2017/08/16/Youtube-dl濃縮教學筆記/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+             <span id="/2017/08/16/Youtube-dl濃縮教學筆記/" class="leancloud_visitors" data-flag-title="Youtube-dl濃縮教學筆記">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">閱讀次數 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="Youtube-dl基本介紹"><a href="#Youtube-dl基本介紹" class="headerlink" title="Youtube-dl基本介紹"></a>Youtube-dl基本介紹</h2><img src="/2017/08/16/Youtube-dl濃縮教學筆記/01.png" alt="01.png" title="">
+<p>很多Youtube線上影片下載服務可能會有一些限制，像是</p>
+<ul>
+<li>畫質、音質和檔案格式限制</li>
+<li>下載頻率不能太密集、效率不夠好</li>
+<li>無法下載整份清單(可能是進階會員才能使用)</li>
+<li>mp3沒有圖片封面和詳細資訊</li>
+<li>天殺的的一堆彈出式色情廣告</li>
+</ul>
+<p>相反的，<a href="https://github.com/rg3/youtube-dl" target="_blank" rel="external">youtube-dl</a>可以滿足你所有的需求：</p>
+<ul>
+<li>畫質、音質沒有限制</li>
+<li>幾乎支援所有影音格式</li>
+<li>可以下載整份影片清單</li>
+<li>mp3可以加入歌曲封面和專輯資訊</li>
+<li>支援字幕、影片縮圖</li>
+</ul>
+<a id="more"></a>
+<p>而且更猛的是，他不只可以下載Youtube的影片，甚至連Facebook、Twitter、Xuite上的影片都可以下載！<br><del>我絕對不會告訴你連Pornhub上的影片都可以輕鬆下載</del><br><del>但是前提是你要會用Command Line啦，呵呵</del></p>
+<p>所有支援下載的網站清單:<br><a href="https://github.com/rg3/youtube-dl/blob/master/docs/supportedsites.md" target="_blank" rel="external">https://github.com/rg3/youtube-dl/blob/master/docs/supportedsites.md</a></p>
+<hr>
+<h2 id="安裝"><a href="#安裝" class="headerlink" title="安裝"></a>安裝</h2><p>利用mac套件管理神器<a href="https://brew.sh" target="_blank" rel="external">Homebrew</a>來安裝<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install youtube-dl</div></pre></td></tr></table></figure></p>
+<h3 id="ffmpeg"><a href="#ffmpeg" class="headerlink" title="ffmpeg"></a>ffmpeg</h3><p>如果要使用youtube-dl的轉檔、嵌入字幕、提取音頻、加入專輯封面等等<code>Post-processing</code>的功能的話，則必須安裝<a href="https://www.ffmpeg.org" target="_blank" rel="external">FFmpeg</a><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ brew install ffmpeg</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="下載影片"><a href="#下載影片" class="headerlink" title="下載影片"></a>下載影片</h2><h3 id="起手式-指定影片檔案格式"><a href="#起手式-指定影片檔案格式" class="headerlink" title="起手式: 指定影片檔案格式"></a>起手式: 指定影片檔案格式</h3><p>用<code>-f</code>或是<code>--format</code>指定影片格式，像是<code>mp4, flv, mkv, webm</code></p>
+<p>Example: 下載mp4格式影片<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -f mp4 &lt;url&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="品質"><a href="#品質" class="headerlink" title="品質"></a>品質</h3><p>Youtube-dl預設會下載最高畫質的影片，但也可以自己選擇想要的品質</p>
+<p>Example: 下載解析度不高於480p的影片<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -f &apos;bestvideo[height&lt;=480][ext=mp4]+bestaudio/best[height&lt;=480][ext=m4a]&apos; &lt;url&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="嵌入字幕"><a href="#嵌入字幕" class="headerlink" title="嵌入字幕"></a>嵌入字幕</h3><p><code>--list-subs</code>列出所有可下載字幕的語言</p>
+<ul>
+<li><code>--write-sub</code>下載字幕</li>
+<li><p><code>--embed-sub</code>將字幕嵌入影片中<br><em>這兩個參數要一起合併使用</em></p>
+</li>
+<li><p><code>--all-subs</code>下載所有語言字幕</p>
+</li>
+<li><code>—-sub-lang LANGS</code>指定字幕語言</li>
+</ul>
+<p>例如我想要下載まふまふcover的這首『Loser』<br><img src="/2017/08/16/Youtube-dl濃縮教學筆記/02.png" alt="02.png" title=""></p>
+<p>首先用<code>--list-subs</code>列出所有可下載字幕的語言<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --list-subs https://www.youtube.com/watch?v=pnnsyjcFnjc</div></pre></td></tr></table></figure></p>
+<img src="/2017/08/16/Youtube-dl濃縮教學筆記/03.png" alt="03.png" title="">
+<p>發現zh-TW(繁體中文)是可選的</p>
+<p>下載影片並且嵌入中文字幕<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --write-sub --embed-sub --sub-lang zh-tw -f mp4 https://www.youtube.com/watch?v=pnnsyjcFnjc</div></pre></td></tr></table></figure></p>
+<p>如果妳想要一次下載所有語言的字幕並且嵌入的話<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --write-sub --embed-sub --all-subs -f mp4 https://www.youtube.com/watch?v=pnnsyjcFnjc</div></pre></td></tr></table></figure></p>
+<p>登登！現在下載下來的影片可以選擇字幕囉～<br><img src="/2017/08/16/Youtube-dl濃縮教學筆記/04.png" alt="04.png" title=""></p>
+<p><em>注意</em>：只有<code>mp4, mkv, webm</code>這些影片格式可以嵌入字幕。</p>
+<hr>
+<h2 id="下載音樂"><a href="#下載音樂" class="headerlink" title="下載音樂"></a>下載音樂</h2><h3 id="起手式-指定音樂檔案類型"><a href="#起手式-指定音樂檔案類型" class="headerlink" title="起手式: 指定音樂檔案類型"></a>起手式: 指定音樂檔案類型</h3><ul>
+<li><code>-x</code>或<code>--extract-audio</code>表示提取音頻</li>
+<li><code>--audio-format</code>後面指定音頻檔案類型，像是 <code>mp3, wav, m4a, aac</code></li>
+</ul>
+<p>Example:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -x --audio-format mp3 &lt;url&gt;</div></pre></td></tr></table></figure></p>
+<h3 id="縮圖和資料"><a href="#縮圖和資料" class="headerlink" title="縮圖和資料"></a>縮圖和資料</h3><ul>
+<li><code>--embed-thumbnail</code>加入專輯封面(其實就是youtube影片上的縮圖)</li>
+<li><code>—-add-metadata</code>加入影片資訊</li>
+</ul>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>例如說我要下載米津玄師的這首「ピースサイン」<br><img src="/2017/08/16/Youtube-dl濃縮教學筆記/05.png" alt="05.png" title=""></p>
+<p>轉檔成mp3並且加入縮圖和影片資訊<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -x --audio-format mp3 --embed-thumbnail --add-metadata https://www.youtube.com/watch?v=9aJVr5tTTWk</div></pre></td></tr></table></figure></p>
+<p>成功下載後可以看到上傳者和影片縮圖<br><img src="/2017/08/16/Youtube-dl濃縮教學筆記/06.png" alt="06.png" title=""><br><img src="/2017/08/16/Youtube-dl濃縮教學筆記/07.png" alt="07.png" title=""></p>
+<hr>
+<h2 id="下載playlist"><a href="#下載playlist" class="headerlink" title="下載playlist"></a>下載playlist</h2><h3 id="下載整份影片清單"><a href="#下載整份影片清單" class="headerlink" title="下載整份影片清單"></a>下載整份影片清單</h3><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -f mp4 &lt;playlist-url&gt;</div></pre></td></tr></table></figure>
+<p><em>PS</em>: 除了影片網址的部分改成影片清單的網址，其他部分和下載影片一樣。</p>
+<h3 id="指定起點和終點"><a href="#指定起點和終點" class="headerlink" title="指定起點和終點"></a>指定起點和終點</h3><ul>
+<li><code>--playlist-start NUMBER</code>: 指定起點</li>
+<li><code>—-playlist-end NUMBER</code>: 指定終點</li>
+</ul>
+<p>從第三個影片開始下載到最後一個影片<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --playlist-start 3 -f mp4 &lt;playlist-url&gt;</div></pre></td></tr></table></figure></p>
+<p>從第一個影片下載到倒數第二個影片<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --playlist-end 2 -f mp4 &lt;playlist-url&gt;</div></pre></td></tr></table></figure></p>
+<p>從第三個影片開始下載到倒數第二個影片<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl --playlist-start 3 --playlist-end 2 -f mp4 &lt;playlist-url&gt;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="輸出檔名"><a href="#輸出檔名" class="headerlink" title="輸出檔名"></a>輸出檔名</h2><p><code>-o, --output TEMPLATE</code>指定檔名輸出模板。預設是<code>%(title)s-%(id)s.%(ext)s</code></p>
+<p>直接指定檔名叫做<code>test.mp4</code><br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -o <span class="string">"test.mp4"</span> -f mp4 &lt;url&gt;</div></pre></td></tr></table></figure></p>
+<p>假如說我覺得影片id很煩很醜，我要把他去掉，只留下影片標題跟副檔名<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl 0o <span class="string">'%(title)s.%(ext)s'</span></div></pre></td></tr></table></figure></p>
+<h3 id="以下官方範例"><a href="#以下官方範例" class="headerlink" title="以下官方範例"></a>以下官方範例</h3><p>Download YouTube playlist videos in separate directory indexed by video order in a playlist<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -o <span class="string">'%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'</span> https://www.youtube.com/playlist?list=PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re</div></pre></td></tr></table></figure></p>
+<p>Download all playlists of YouTube channel/user keeping each playlist in separate directory:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -o <span class="string">'%(uploader)s/%(playlist)s/%(playlist_index)s - %(title)s.%(ext)s'</span> https://www.youtube.com/user/TheLinuxFoundation/playlists</div></pre></td></tr></table></figure></p>
+<p>查詢更多模板參數:<br><a href="https://github.com/rg3/youtube-dl#output-template" target="_blank" rel="external">https://github.com/rg3/youtube-dl#output-template</a></p>
+<hr>
+<h2 id="登入"><a href="#登入" class="headerlink" title="登入"></a>登入</h2><p>如果有些影片要登入後才能觀看要怎麼辦呢？youtube-dl還有支援帳戶登入的功能:</p>
+<ul>
+<li><code>-u, --username USERNAME</code></li>
+<li><code>-p, --password PASSWORD</code></li>
+</ul>
+<p>Example:<br><figure class="highlight sh"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ youtube-dl -u <span class="string">'username@gmail.com'</span> -p <span class="string">'password'</span> https://www.youtube.com/?v=&lt;video_id&gt;</div></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h2><p>以上的筆記為<em>超濃縮精華版</em>，youtube-dl還有更多強大的功能和參數可供使用。如果要更詳細的參考文件，可以直接參考官方文件: <a href="https://github.com/rg3/youtube-dl" target="_blank" rel="external">https://github.com/rg3/youtube-dl</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/youtube/" rel="tag"># youtube</a>
+          
+            <a href="/tags/video/" rel="tag"># video</a>
+          
+            <a href="/tags/download/" rel="tag"># download</a>
+          
+            <a href="/tags/command-line/" rel="tag"># command line</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/11/用Hexo-Github-Pages搭建個人部落格/" rel="next" title="用Hexo + Github Pages搭建個人部落格">
+                <i class="fa fa-chevron-left"></i> 用Hexo + Github Pages搭建個人部落格
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目錄
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            本站概覽
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.jpg"
+               alt="小蛇蛇" />
+          <p class="site-author-name" itemprop="name">小蛇蛇</p>
+           
+              <p class="site-description motion-element" itemprop="description"></p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">文章</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">標籤</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/YogaPan" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Youtube-dl基本介紹"><span class="nav-number">1.</span> <span class="nav-text">Youtube-dl基本介紹</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安裝"><span class="nav-number">2.</span> <span class="nav-text">安裝</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ffmpeg"><span class="nav-number">2.1.</span> <span class="nav-text">ffmpeg</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下載影片"><span class="nav-number">3.</span> <span class="nav-text">下載影片</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#起手式-指定影片檔案格式"><span class="nav-number">3.1.</span> <span class="nav-text">起手式: 指定影片檔案格式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#品質"><span class="nav-number">3.2.</span> <span class="nav-text">品質</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#嵌入字幕"><span class="nav-number">3.3.</span> <span class="nav-text">嵌入字幕</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下載音樂"><span class="nav-number">4.</span> <span class="nav-text">下載音樂</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#起手式-指定音樂檔案類型"><span class="nav-number">4.1.</span> <span class="nav-text">起手式: 指定音樂檔案類型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#縮圖和資料"><span class="nav-number">4.2.</span> <span class="nav-text">縮圖和資料</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Example"><span class="nav-number">4.3.</span> <span class="nav-text">Example</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#下載playlist"><span class="nav-number">5.</span> <span class="nav-text">下載playlist</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下載整份影片清單"><span class="nav-number">5.1.</span> <span class="nav-text">下載整份影片清單</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指定起點和終點"><span class="nav-number">5.2.</span> <span class="nav-text">指定起點和終點</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#輸出檔名"><span class="nav-number">6.</span> <span class="nav-text">輸出檔名</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#以下官方範例"><span class="nav-number">6.1.</span> <span class="nav-text">以下官方範例</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#登入"><span class="nav-number">7.</span> <span class="nav-text">登入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#總結"><span class="nav-number">8.</span> <span class="nav-text">總結</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-bolt"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">小蛇蛇</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
+</div>
+
+<div class="theme-info">
+  主題 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  
+  <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.2"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+    
+      <script id="dsq-count-scr" src="https://yogapan.disqus.com/count.js" async></script>
+    
+
+    
+      <script type="text/javascript">
+        var disqus_config = function () {
+          this.page.url = 'https://yogapan.github.io/2017/08/16/Youtube-dl濃縮教學筆記/';
+          this.page.identifier = '2017/08/16/Youtube-dl濃縮教學筆記/';
+          this.page.title = 'Youtube-dl濃縮教學筆記';
+        };
+        var d = document, s = d.createElement('script');
+        s.src = 'https://yogapan.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      </script>
+    
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("jXTG27A78yPA0hKLS1as8SQj-gzGzoHsz", "mCLsJCqcDv9zCYPSEfu4lXhx");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
